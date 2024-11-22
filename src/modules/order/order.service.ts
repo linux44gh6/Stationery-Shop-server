@@ -9,14 +9,15 @@ const createOrder = async (data: Order) => {
 const getAllOrders = async () => {
   const result = await orderModel.aggregate([
     {
-      $group: {
-        _id: null,
-        totalRevenue: { $sum: '$totalPrice' },
+      $project: {
+        totalPrice: 1,
       },
     },
   ])
-  return result
+  const totalRevenue = result.reduce((sum, order) => sum + order.totalPrice, 0)
+  return totalRevenue
 }
+
 export const orderService = {
   createOrder,
   getAllOrders,

@@ -12,11 +12,11 @@ const createOrder = async (req: Request, res: Response) => {
 }
 
 const getAllOrders = async (req: Request, res: Response) => {
-  const result = await orderService.getAllOrders()
+  const totalRevenue = await orderService.getAllOrders()
   res.json({
     message: 'Order revenue collection',
     status: true,
-    data: result,
+    data: { totalRevenue },
   })
 }
 export const orderController = {
