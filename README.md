@@ -7,7 +7,7 @@ How to run this repo into you local computer--
 
 1.Clone this repo in local computer.
 
-2.cd <repository-name>
+2.cd <repo fileName>
 
 3.npm install
 
