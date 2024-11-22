@@ -37,5 +37,25 @@ const productSchema = new Schema<Product>({
     type: Boolean,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: null, // Default value
+  },
+  updatedAt: {
+    type: Date,
+    default: null, // Default value
+  },
+})
+
+productSchema.pre('save', function (this, next) {
+  if (!this.createdAt && !this.updatedAt) {
+    this.createdAt = new Date()
+    this.updatedAt = new Date()
+  }
+  next()
+})
+productSchema.pre('findOneAndUpdate', function (this, next) {
+  this.set({ updatedAt: new Date() })
+  next()
 })
 export const productModel = model<Product>('product', productSchema)

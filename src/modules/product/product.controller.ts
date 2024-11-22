@@ -37,8 +37,32 @@ const getProductById = async (req: Request, res: Response) => {
     data: result,
   })
 }
+
+const updateProductById = async (req: Request, res: Response) => {
+  const productId = req.params.productId
+  const data = req.body
+  const result = await productService.updateProduct(productId, data)
+  res.json({
+    message: 'product update successfully',
+    status: true,
+    data: result,
+  })
+}
+
+const deleteProductById = async (req: Request, res: Response) => {
+  const productId = req.params.productId
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const result = await productService.deleteProduct(productId)
+  res.json({
+    message: 'product deleted successful',
+    status: true,
+    data: {},
+  })
+}
 export const productController = {
   createProduct,
   getAllProductFromDB,
   getProductById,
+  updateProductById,
+  deleteProductById,
 }
